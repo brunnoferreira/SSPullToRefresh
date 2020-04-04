@@ -260,8 +260,12 @@
 		return;
 	}
 
+	// Avoid changing insets other than top on the scroll view
+	UIEdgeInsets scrollViewInsets = self.scrollView.contentInset;
+	scrollViewInsets.top = inset.top;
+
 	// Update the content inset
-	self.scrollView.contentInset = inset;
+	self.scrollView.contentInset = scrollViewInsets;
 
 	// For static style, trigger layout subviews immediately to prevent jumping
 	if (self.style == SSPullToRefreshViewStyleStatic) {
